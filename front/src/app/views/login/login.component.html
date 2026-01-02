@@ -1,0 +1,28 @@
+<div class="container-fluid main main-background">
+  <div class="row h-100">
+    <div class="col main__left">
+      <app-moving-banners></app-moving-banners>
+    </div>
+
+    <div class="col col-lg-3 d-flex flex-column justify-content-between bg-light main__right">
+      <form class="mt-5" [formGroup]="loginFormGroup">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" formControlName="loginName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="container d-flex flex-column mt-4">
+          <button type="submit" class="btn btn-primary m-2 border-0" [disabled]="!loginFormGroup.valid" (click)="onLoginClick()">Submit</button>
+          <button type="submit" class="btn btn-primary m-2 border-0" (click)="onRegisterNewUserClick()">Register</button>
+        </div>
+      </form>
+      <div class="container m-auto text-center mt-4 mb-1">
+        <p class="text-center m-0"><small>Powered By:</small></p>
+        <img class="img-fluid" src="assets/logo-1-trans.svg">
+      </div>
+    </div>
+  </div>
+</div>

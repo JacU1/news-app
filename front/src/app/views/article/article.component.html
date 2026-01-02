@@ -1,0 +1,15 @@
+<div class="article-page container-fluid primary-background">
+    <div class="container d-flex justify-content-center w-50 flex-column">
+        <img [src]="(selectedArticle$ | async)?.urlToImage" class="img-fluid" alt="main-img">
+
+        <h1 class="mt-3">{{ (selectedArticle$ | async)?.title }}</h1>
+
+        <div>
+            <p>{{(selectedArticle$ | async)?.description}}</p>
+        </div>
+
+        <div>
+            <p>{{(selectedArticle$ | async)?.content}}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+.navbar {
+    height: 91px;
+}
+
+img {
+    @media screen and (min-width: 1920px) {
+        width: 75% !important;
+    }
+}

@@ -1,0 +1,32 @@
+@import '/src/styles.scss';
+
+.content-list {
+    &__background {
+        background-color: $primary-background;
+        margin: 0;
+        max-width: 100vw;
+        padding-top: 125px;
+    }
+}
+
+.list-group-item {
+    padding: 0;
+    border: none;
+}
+
+.card-wrapper {
+    cursor: pointer;
+	-moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-wrapper:hover { 
+    -webkit-transform: translate(0, -8px);
+	-moz-transform: translate(0, -8px);
+	-ms-transform: translate(0, -8px);
+	-o-transform: translate(0, -8px);
+	transform: translate(0, -8px);
+    opacity: 0.95;
+	box-shadow: 1px 1px 24px 0px rgba(255, 255, 255, 1);
+}

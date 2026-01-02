@@ -1,0 +1,15 @@
+  <ng-container class="carousel">
+    <carousel>
+      <slide *ngFor="let news of sliderNews">
+        <div class="carousel__slide">
+          <figure>
+            <img [src]="news.image" alt="news_slide">
+          </figure>
+        </div>
+        <div class="carousel-caption">
+          <p>{{news.title}}</p>
+        </div>
+      </slide>
+    </carousel>
+  </ng-container>
+

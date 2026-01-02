@@ -1,0 +1,8 @@
+<ng-container *ngIf="(notificationBox$ | async)?.show">
+    <div [ngClass]="'alert alert-' + notificationType + ' ' + 'notification-box' + ' ' + 'alert-dismissible fade show'" 
+         role="alert"
+         data-tor="show:scale.from(0)">
+        {{ notificationMessage }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</ng-container>

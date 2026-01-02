@@ -1,0 +1,13 @@
+<ng-container>
+  <app-main-news
+  [mainPanelNewsArray]="articles$ | async"
+  [isLoading]="isLoading$ | async"
+  ></app-main-news>
+</ng-container>
+
+<ng-container>
+  <app-content-list
+    [contentListArticles]="articlesForList$ | async">
+  </app-content-list>
+</ng-container>
+
