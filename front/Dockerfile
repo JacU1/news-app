@@ -2,24 +2,32 @@
 FROM node:lts-hydrogen as build
 
 # Set the working directory
-WORKDIR /usr/local/app/
+WORKDIR /usr/local/app
 
-# Add the source code to app
-COPY ./news-app-angular /usr/local/app/
+# Copy package files first for better cache usage
+COPY package*.json ./
 
-# Install all the dependencies
-RUN npm install
+# Install dependencies
+RUN npm ci --silent || npm install --silent
 
-# Generate the build of the application
-RUN npm run build
+# Copy rest of the sources
+COPY . .
 
-# Stage 2: Serve app with nginx server
+# Build the Angular app into a flat `dist/` directory so it's easy to copy to nginx
+# We pass --output-path=dist so the CLI places build files directly in `dist/` (not `dist/<project-name>`)
+RUN npm run build -- --output-path=dist --configuration production
 
-# Use official nginx image as the base image
-FROM nginx:latest
+# Stage 2: serve app with nginx
+FROM nginx:stable-alpine
 
-# Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/news-app-angular /usr/share/nginx/html
+# Replace default nginx config with one that supports SPA routing (try_files -> index.html)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy built files to nginx html root
+COPY --from=build /usr/local/app/dist/ /usr/share/nginx/html/
 
 # Expose port 80
 EXPOSE 80
+
+# Run nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]

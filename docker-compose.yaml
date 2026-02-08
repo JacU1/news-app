@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: news-app-angular
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "9080:80"
+  database:
+    container_name: news-app-db
+    image: mysql:8.0.31-debian
+    volumes:
+      - mysql_db:/data
+    ports:
+      - "9003:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+  server: 
+    container_name: news-app-api
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "9002:9002"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:9002
+
+volumes:
+  mysql_db:
+    external: false
+
+networks:
+  default:
+    name: news-app-network
+
