@@ -7,10 +7,11 @@ import { Observable } from 'rxjs';
 import { IArticle } from 'src/app/core/models/news-api-model';
 
 @Component({
-  selector: 'app-article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-article',
+    templateUrl: './article.component.html',
+    styleUrls: ['./article.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ArticleComponent implements OnInit {
   public selectedArticle$!: Observable<IArticle>;

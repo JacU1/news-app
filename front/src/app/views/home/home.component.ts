@@ -8,10 +8,11 @@ import { articlesSelector, isLoadingSelector } from 'src/app/core/store';
 import { AppStateInterface } from 'src/app/core/models/appState.interface';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private readonly _unSubscription$: Subscription = new Subscription();

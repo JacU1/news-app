@@ -10,9 +10,10 @@ import { CsrfService } from 'src/app/shared/services/csrf/csrf.service';
 import { NotificationBoxService } from 'src/app/shared/services/notification-box/notification-box.service';
 
 @Component({
-  selector: 'app-signUp-component',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+    selector: 'app-signUp-component',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'],
+    standalone: false
 })
 export class SignUpComponent extends BasePage implements OnInit {
 

@@ -3,10 +3,11 @@ import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChan
 import {IArticle} from "../../../../../core/models/news-api-model";
 
 @Component({
-  selector: 'app-main-news',
-  templateUrl: './main-news.component.html',
-  styleUrls: ['./main-news.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-main-news',
+    templateUrl: './main-news.component.html',
+    styleUrls: ['./main-news.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MainNewsComponent implements OnChanges {
   @Input() mainPanelNewsArray : IArticle[] | null = [];

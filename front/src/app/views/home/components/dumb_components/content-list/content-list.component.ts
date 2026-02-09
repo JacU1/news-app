@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { IArticle } from 'src/app/core/models/news-api-model';
 
 @Component({
-  selector: 'app-content-list',
-  templateUrl: './content-list.component.html',
-  styleUrls: ['./content-list.component.scss']
+    selector: 'app-content-list',
+    templateUrl: './content-list.component.html',
+    styleUrls: ['./content-list.component.scss'],
+    standalone: false
 })
 export class ContentListComponent {
   @Input() set contentListArticles(value: IArticle[] | null) {

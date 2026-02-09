@@ -3,8 +3,9 @@ import { Subject } from 'rxjs';
 import { CsrfService } from '../services/csrf/csrf.service';
 
 @Component({
-    template: ''
-  })
+    template: '',
+    standalone: false
+})
 export abstract class BasePage implements OnDestroy, OnInit {
   protected destroyed$ = new Subject<void>();
   

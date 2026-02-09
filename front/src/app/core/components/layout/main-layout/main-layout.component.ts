@@ -4,9 +4,10 @@ import * as homeActions from '../../../store/index';
 import { AppStateInterface } from 'src/app/core/models/appState.interface';
 
 @Component({
-  selector: 'app-main-layout',
-  templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.sass']
+    selector: 'app-main-layout',
+    templateUrl: './main-layout.component.html',
+    styleUrls: ['./main-layout.component.sass'],
+    standalone: false
 })
 export class MainLayoutComponent implements OnInit {
 

@@ -4,9 +4,10 @@ import { NotificationTypes } from 'src/app/core/models/notification-box.interfac
 import { NotificationBoxService } from '../../services/notification-box/notification-box.service';
 
 @Component({
-  selector: 'app-notification-box',
-  templateUrl: './notification-box.component.html',
-  styleUrls: ['./notification-box.component.scss']
+    selector: 'app-notification-box',
+    templateUrl: './notification-box.component.html',
+    styleUrls: ['./notification-box.component.scss'],
+    standalone: false
 })
 export class NotificationBoxComponent implements OnInit, OnDestroy {
 

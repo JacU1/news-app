@@ -3,9 +3,10 @@ import { LoadingSpinnerService } from '../../services/loading-spinner/loading-sp
 import { Observable, isObservable } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 @Component({
-  selector: 'app-loading-spinner',
-  templateUrl: './loading-spinner.component.html',
-  styleUrls: ['./loading-spinner.component.scss']
+    selector: 'app-loading-spinner',
+    templateUrl: './loading-spinner.component.html',
+    styleUrls: ['./loading-spinner.component.scss'],
+    standalone: false
 })
 export class LoadingSpinnerComponent {
 

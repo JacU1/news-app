@@ -2,10 +2,11 @@ import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChan
 import {ISliderNews} from 'src/app/core/models/page-carousel.model';
 
 @Component({
-  selector: 'app-page-carousel',
-  templateUrl: './page-carousel.component.html',
-  styleUrls: ['./page-carousel.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-page-carousel',
+    templateUrl: './page-carousel.component.html',
+    styleUrls: ['./page-carousel.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PageCarouselComponent implements OnChanges{
   @Input() sliderNews: ISliderNews[]  = [];
