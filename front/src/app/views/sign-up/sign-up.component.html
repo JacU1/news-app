@@ -5,98 +5,122 @@
     </div>
 
     <div class="col col-lg-3 bg-light d-flex flex-column justify-content-between main__right">
-     <form [formGroup]="getFormGroup" (ngSubmit)="onSubmit()">
-                <div class="card-body p-md-4 text-black">
-                  <h3 class="text-center h1 fw-bold mb-3 mt-1">Sign up !</h3>
-  
-                    <div class="form-outline mb-3">
-                      <input type="text" formControlName="firstName" class="form-control form-control-md" placeholder="Enter First name">
-                      <ng-container *ngIf="(getFormGroup.valueChanges | async)">
-                        <div *ngIf="getFormGroup.get('firstName')?.errors?.['required']" class="invalid-feedback d-flex">
-                          First name required!
-                        </div>
-                      </ng-container>
-                    </div>
+      <form [formGroup]="getFormGroup" (ngSubmit)="onSubmit()">
+        <div class="card-body p-md-4 text-black">
+          <h3 class="text-center h1 fw-bold mb-3 mt-1">Sign up !</h3>
 
-                    <div class="form-outline mb-3">
-                      <input type="text" formControlName="lastName" class="form-control form-control-md" placeholder="Enter Last name">
-                      <ng-container *ngIf="(getFormGroup.valueChanges | async)">
-                        <div *ngIf="getFormGroup.get('lastName')?.errors?.['required']" class="invalid-feedback d-flex">
-                          Last name required!
-                        </div>
-                      </ng-container>
-                    </div>
-
-                  <div class="form-outline mb-3">
-                    <input type="email" formControlName="email" class="form-control form-control-md" placeholder="Email"/>
-                    <ng-container *ngIf="(getFormGroup.valueChanges | async)">
-                      <div *ngIf="getFormGroup.get('email')?.errors?.['required']" class="invalid-feedback d-flex">
-                        Email required!
-                      </div>
-                      <div *ngIf="getFormGroup.get('email')?.errors?.['email']" class="invalid-feedback d-flex">
-                        Wrong email!
-                      </div>
-                    </ng-container>
-                  </div>
-
-                  <div class="form-outline mb-3">
-                    <input type="text" formControlName="userTag" class="form-control form-control-md" placeholder="User tag"/>
-                    <ng-container *ngIf="(getFormGroup.valueChanges | async)">
-                      <div *ngIf="getFormGroup.get('userTag')?.errors?.['required']" class="invalid-feedback d-flex">
-                        User tag required!
-                      </div>
-                      <div *ngIf="getFormGroup.get('userTag')?.errors?.['min']" class="invalid-feedback d-flex">
-                        User tag too short!
-                      </div>
-                    </ng-container>
-                  </div>
-  
-                  <form [formGroup]="getPasswordFormGroup">
-                    <div class="form-outline mb-3">
-                      <input type="password" formControlName="password" class="form-control form-control-md" placeholder="Password"/>
-                        <ng-container *ngIf="(getPasswordFormGroup.valueChanges | async)">
-                          <div *ngIf="getPasswordFormGroup.get('password')?.errors?.['required']" class="invalid-feedback d-flex">
-                            Password required!
-                          </div>
-                          <div *ngIf="getPasswordFormGroup.get('password')?.errors?.['minLenght']" class="invalid-feedback d-flex">
-                            Password too short!
-                          </div>
-                          <div *ngIf="getPasswordFormGroup.get('password')?.errors?.['maxLenght']" class="invalid-feedback d-flex">
-                            Password too long!
-                          </div>
-                          <div *ngIf="getPasswordFormGroup.get('password')?.errors?.['pattern']" class="invalid-feedback d-flex">
-                            Password needs to have one small letter, one capital letter, one number and one special character.
-                          </div>
-                        </ng-container>
-                    </div>
-  
-                    <div class="form-outline mb-3">
-                      <input type="password" formControlName="confirmPassword" class="form-control form-control-md has-validation" placeholder="Confirm password"/>
-                      <ng-container *ngIf="(getPasswordFormGroup.valueChanges | async)">
-                        <div *ngIf="getPasswordFormGroup.get('confirmPassword')?.errors?.['required']" class="invalid-feedback d-flex">
-                          Confirm password required!
-                        </div>
-                        <div *ngIf="getPasswordFormGroup.get('confirmPassword')?.errors?.['NoPassswordMatch']" class="invalid-feedback d-flex">
-                          Password not matching confirm password.
-                        </div>
-                      </ng-container>
-                    </div>
-                  </form>
-  
-                  <div class="d-flex justify-content-center pt-4 flex-column w-75 m-auto">
-                    <div class="d-flex justify-content-center">
-                      <button type="button" class="btn btn-primary btn-ms-2 m-2 border-0 w-100 p-3" (click)="onResetForm()">Reset all</button>
-                      <button type="submit" class="btn btn-primary btn ms-2 m-2 border-0 w-100 p-3">Register</button>
-                    </div>
-                    <p class="w-100 text-center mt-4"><small>If you already have a account you can log in</small></p>
-                    <button [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-primary btn ms-2 border-0">Log in</button>
-                  </div>
+          <div class="form-outline mb-3">
+            <input type="text" formControlName="firstName" class="form-control form-control-md" placeholder="Enter First name">
+            @if ((getFormGroup.valueChanges | async)) {
+              @if (getFormGroup.get('firstName')?.errors?.['required']) {
+                <div class="invalid-feedback d-flex">
+                  First name required!
                 </div>
-              </form>
-              <div class="container m-auto text-center mt-4 mb-1">
-                <p class="text-center m-0"><small>Powered By:</small></p>
-                <img class="img-fluid" src="assets/logo-1-trans.svg">
-              </div>
+              }
+            }
+          </div>
+
+          <div class="form-outline mb-3">
+            <input type="text" formControlName="lastName" class="form-control form-control-md" placeholder="Enter Last name">
+            @if ((getFormGroup.valueChanges | async)) {
+              @if (getFormGroup.get('lastName')?.errors?.['required']) {
+                <div class="invalid-feedback d-flex">
+                  Last name required!
+                </div>
+              }
+            }
+          </div>
+
+          <div class="form-outline mb-3">
+            <input type="email" formControlName="email" class="form-control form-control-md" placeholder="Email"/>
+            @if ((getFormGroup.valueChanges | async)) {
+              @if (getFormGroup.get('email')?.errors?.['required']) {
+                <div class="invalid-feedback d-flex">
+                  Email required!
+                </div>
+              }
+              @if (getFormGroup.get('email')?.errors?.['email']) {
+                <div class="invalid-feedback d-flex">
+                  Wrong email!
+                </div>
+              }
+            }
+          </div>
+
+          <div class="form-outline mb-3">
+            <input type="text" formControlName="userTag" class="form-control form-control-md" placeholder="User tag"/>
+            @if ((getFormGroup.valueChanges | async)) {
+              @if (getFormGroup.get('userTag')?.errors?.['required']) {
+                <div class="invalid-feedback d-flex">
+                  User tag required!
+                </div>
+              }
+              @if (getFormGroup.get('userTag')?.errors?.['min']) {
+                <div class="invalid-feedback d-flex">
+                  User tag too short!
+                </div>
+              }
+            }
+          </div>
+
+          <form [formGroup]="getPasswordFormGroup">
+            <div class="form-outline mb-3">
+              <input type="password" formControlName="password" class="form-control form-control-md" placeholder="Password"/>
+              @if ((getPasswordFormGroup.valueChanges | async)) {
+                @if (getPasswordFormGroup.get('password')?.errors?.['required']) {
+                  <div class="invalid-feedback d-flex">
+                    Password required!
+                  </div>
+                }
+                @if (getPasswordFormGroup.get('password')?.errors?.['minLenght']) {
+                  <div class="invalid-feedback d-flex">
+                    Password too short!
+                  </div>
+                }
+                @if (getPasswordFormGroup.get('password')?.errors?.['maxLenght']) {
+                  <div class="invalid-feedback d-flex">
+                    Password too long!
+                  </div>
+                }
+                @if (getPasswordFormGroup.get('password')?.errors?.['pattern']) {
+                  <div class="invalid-feedback d-flex">
+                    Password needs to have one small letter, one capital letter, one number and one special character.
+                  </div>
+                }
+              }
+            </div>
+
+            <div class="form-outline mb-3">
+              <input type="password" formControlName="confirmPassword" class="form-control form-control-md has-validation" placeholder="Confirm password"/>
+              @if ((getPasswordFormGroup.valueChanges | async)) {
+                @if (getPasswordFormGroup.get('confirmPassword')?.errors?.['required']) {
+                  <div class="invalid-feedback d-flex">
+                    Confirm password required!
+                  </div>
+                }
+                @if (getPasswordFormGroup.get('confirmPassword')?.errors?.['NoPassswordMatch']) {
+                  <div class="invalid-feedback d-flex">
+                    Password not matching confirm password.
+                  </div>
+                }
+              }
+            </div>
+          </form>
+
+          <div class="d-flex justify-content-center pt-4 flex-column w-75 m-auto">
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary btn-ms-2 m-2 border-0 w-100 p-3" (click)="onResetForm()">Reset all</button>
+              <button type="submit" class="btn btn-primary btn ms-2 m-2 border-0 w-100 p-3">Register</button>
+            </div>
+            <p class="w-100 text-center mt-4"><small>If you already have a account you can log in</small></p>
+            <button [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-primary btn ms-2 border-0">Log in</button>
+          </div>
+        </div>
+      </form>
+      <div class="container m-auto text-center mt-4 mb-1">
+        <p class="text-center m-0"><small>Powered By:</small></p>
+        <img class="img-fluid" src="assets/logo-1-trans.svg">
+      </div>
     </div>
   </div>
 </div>

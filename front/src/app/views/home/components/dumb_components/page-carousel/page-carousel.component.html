@@ -1,6 +1,7 @@
-  <ng-container class="carousel">
-    <carousel>
-      <slide *ngFor="let news of sliderNews">
+<ng-container class="carousel">
+  <carousel>
+    @for (news of sliderNews; track news) {
+      <slide>
         <div class="carousel__slide">
           <figure>
             <img [src]="news.image" alt="news_slide">
@@ -10,6 +11,7 @@
           <p>{{news.title}}</p>
         </div>
       </slide>
-    </carousel>
-  </ng-container>
+    }
+  </carousel>
+</ng-container>
 
