@@ -1,13 +1,14 @@
-import { IfStmt, ThisReceiver } from '@angular/compiler';
-import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {IArticle} from "../../../../../core/models/news-api-model";
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-main-news',
     templateUrl: './main-news.component.html',
     styleUrls: ['./main-news.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: true,
+    imports: [RouterModule]
 })
 export class MainNewsComponent implements OnChanges {
   @Input() mainPanelNewsArray : IArticle[] | null = [];

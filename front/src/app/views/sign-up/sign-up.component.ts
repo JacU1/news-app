@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MovingBannersComponent } from 'src/app/shared/components/moving-banners/moving-banners.component';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { NotificationTypes } from 'src/app/core/models/notification-box.interface';
 import { BasePage } from 'src/app/shared/classes/BasePage';
@@ -10,12 +13,13 @@ import { CsrfService } from 'src/app/shared/services/csrf/csrf.service';
 import { NotificationBoxService } from 'src/app/shared/services/notification-box/notification-box.service';
 
 @Component({
-    selector: 'app-signUp-component',
-    templateUrl: './sign-up.component.html',
-    styleUrls: ['./sign-up.component.scss'],
-    standalone: false
+  selector: 'app-signUp-component',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
+  standalone: true,
+  imports: [RouterModule, CommonModule, ReactiveFormsModule, MovingBannersComponent]
 })
-export class SignUpComponent extends BasePage implements OnInit {
+export class SignUpComponent extends BasePage {
 
   private formGroup!: FormGroup;
 
@@ -53,9 +57,7 @@ export class SignUpComponent extends BasePage implements OnInit {
     });
   }
 
-  override ngOnInit(): void {
-    console.log(this.formGroup); 
-  }
+  // ngOnInit removed as it was empty
 
   onSubmit() : void {
     this._authService.registerUser(this.formGroup).pipe(takeUntil(this.destroyed$)).subscribe(() => {

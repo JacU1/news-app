@@ -6,13 +6,17 @@ import { Store } from '@ngrx/store';
 import * as homeActions from '../../core/store/actions/news.action';
 import { articlesSelector, isLoadingSelector } from 'src/app/core/store';
 import { AppStateInterface } from 'src/app/core/models/appState.interface';
+import { CommonModule } from '@angular/common';
+import { ContentListComponent } from './components/dumb_components/content-list/content-list.component';
+import { MainNewsComponent } from './components/dumb_components/main-news/main-news.component';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.sass'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, ContentListComponent, MainNewsComponent]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private readonly _unSubscription$: Subscription = new Subscription();
@@ -29,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    // this._store.dispatch(homeActions.LOAD_NEWS());
+    this._store.dispatch(homeActions.LOAD_NEWS());
   }
 
   public ngOnDestroy(): void {

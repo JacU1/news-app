@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/core/models/appState.interface';
 import { selectedArticle } from 'src/app/core/store';
@@ -11,7 +12,8 @@ import { IArticle } from 'src/app/core/models/news-api-model';
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: true,
+    imports: [RouterModule, CommonModule]
 })
 export class ArticleComponent implements OnInit {
   public selectedArticle$!: Observable<IArticle>;

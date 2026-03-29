@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, Signal, SimpleChanges, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { IArticle } from 'src/app/core/models/news-api-model';
 
 @Component({
     selector: 'app-content-list',
     templateUrl: './content-list.component.html',
     styleUrls: ['./content-list.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, RouterModule]
 })
 export class ContentListComponent {
   @Input() set contentListArticles(value: IArticle[] | null) {

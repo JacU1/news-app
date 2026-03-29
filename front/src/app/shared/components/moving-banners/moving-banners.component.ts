@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-moving-banners',
-    templateUrl: './moving-banners.component.html',
-    styleUrls: ['./moving-banners.component.scss'],
-    standalone: false
+  selector: 'app-moving-banners',
+  templateUrl: './moving-banners.component.html',
+  styleUrls: ['./moving-banners.component.scss'],
+  standalone: true
 })
 export class MovingBannersComponent implements OnInit {
 

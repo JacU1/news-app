@@ -1,22 +1,22 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth/auth-service';
 import { NotificationBoxService } from 'src/app/shared/services/notification-box/notification-box.service';
 import { NotificationTypes } from 'src/app/core/models/notification-box.interface';
 import { BasePage } from 'src/app/shared/classes/BasePage';
 import { CsrfService } from 'src/app/shared/services/csrf/csrf.service';
-import { AppStateInterface } from 'src/app/core/models/appState.interface';
-import { Store } from '@ngrx/store';
+import { MovingBannersComponent } from 'src/app/shared/components/moving-banners/moving-banners.component';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [ReactiveFormsModule, MovingBannersComponent]
 })
 export class LoginComponent extends BasePage {
 

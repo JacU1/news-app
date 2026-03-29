@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationTypes } from 'src/app/core/models/notification-box.interface';
 import { NotificationBoxService } from '../../services/notification-box/notification-box.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-notification-box',
     templateUrl: './notification-box.component.html',
     styleUrls: ['./notification-box.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class NotificationBoxComponent implements OnInit, OnDestroy {
 
