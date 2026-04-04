@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, Signal, SimpleChanges, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { IArticle } from 'src/app/core/models/news-api-model';
+import { IArticle } from '../../../../../core/models/news-api-model';
 
 @Component({
     selector: 'app-content-list',

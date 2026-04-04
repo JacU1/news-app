@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { INotificationBox, NotificationTypes } from 'src/app/core/models/notification-box.interface';
+import { INotificationBox, NotificationTypes } from '../../../core/models/notification-box.interface';
 
 @Injectable({
   providedIn: 'root'

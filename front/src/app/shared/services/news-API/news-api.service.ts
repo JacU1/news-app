@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { delay, map, Observable, Subject, tap} from 'rxjs';
-import { API_KEY, API_URL } from 'src/app/core/config/constants';
-import { IArticle, INewsApiResponse } from 'src/app/core/models/news-api-model';
+import { IArticle, INewsApiResponse } from '../../../core/models/news-api-model';
+import { API_KEY, API_URL } from '../../../core/config/constants';
 @Injectable()
 export class NewsApiService {
   

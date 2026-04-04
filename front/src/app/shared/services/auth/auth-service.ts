@@ -2,12 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { EMPTY, Observable, catchError, lastValueFrom, map, of, tap } from 'rxjs';
-import { BASE_API } from 'src/app/core/config/constants';
-import { NotificationTypes } from 'src/app/core/models/notification-box.interface';
-import { IUserAuthResponse } from 'src/app/core/models/user-auth-response';
 import { NotificationBoxService } from '../notification-box/notification-box.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { IUserAuthResponse } from '../../../core/models/user-auth-response';
+import { BASE_API } from '../../../core/config/constants';
+import { NotificationTypes } from '../../../core/models/notification-box.interface';
 
 @Injectable()
 export class AuthService {

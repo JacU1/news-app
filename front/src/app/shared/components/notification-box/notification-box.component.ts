@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NotificationTypes } from 'src/app/core/models/notification-box.interface';
 import { NotificationBoxService } from '../../services/notification-box/notification-box.service';
 import { CommonModule } from '@angular/common';
+import { NotificationTypes } from '../../../core/models/notification-box.interface';
 
 @Component({
     selector: 'app-notification-box',

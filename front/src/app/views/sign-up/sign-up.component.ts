@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MovingBannersComponent } from 'src/app/shared/components/moving-banners/moving-banners.component';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { takeUntil } from 'rxjs';
-import { NotificationTypes } from 'src/app/core/models/notification-box.interface';
-import { BasePage } from 'src/app/shared/classes/BasePage';
-import { CustomFormValidators } from 'src/app/shared/classes/custom-form-validators';
-import { AuthService } from 'src/app/shared/services/auth/auth-service';
-import { CsrfService } from 'src/app/shared/services/csrf/csrf.service';
-import { NotificationBoxService } from 'src/app/shared/services/notification-box/notification-box.service';
+import { MovingBannersComponent } from '../../shared/components/moving-banners/moving-banners.component';
+import { BasePage } from '../../shared/classes/BasePage';
+import { AuthService } from '../../shared/services/auth/auth-service';
+import { NotificationBoxService } from '../../shared/services/notification-box/notification-box.service';
+import { CsrfService } from '../../shared/services/csrf/csrf.service';
+import { CustomFormValidators } from '../../shared/classes/custom-form-validators';
+import { NotificationTypes } from '../../core/models/notification-box.interface';
 
 @Component({
   selector: 'app-signUp-component',

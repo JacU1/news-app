@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { switchMap } from 'rxjs';
-import { BASE_API } from 'src/app/core/config/constants';
 import { AuthService } from '../auth/auth-service';
+import { BASE_API } from '../../../core/config/constants';
 
 @Injectable({
   providedIn: 'root'

@@ -3,13 +3,14 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
-import { provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
-import { newsReducers } from './app/core/store/reducers/news.reducer';
-import { NewsEffects } from './app/core/store/effects/news.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouter } from '@angular/router';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
+import { LoadingSpinnerService } from './app/shared/services/loading-spinner/loading-spinner.service';
+import { LoadingSpinnerInterceptor } from './app/shared/interceptors/loading-spinner.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService } from './app/shared/services/auth/auth-service';
+import { NewsApiService } from './app/shared/services/news-API/news-api.service';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -23,8 +24,66 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideZoneChangeDetection(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideStore({ homePage: newsReducers }),
-    provideEffects([NewsEffects]),
+    LoadingSpinnerService,
+    AuthService,
+    NewsApiService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingSpinnerInterceptor,
+      multi: true
+    },
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true,
+    }),
+    {
+      provide: JWT_OPTIONS,
+      useValue: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:9002"],
+        disallowedRoutes: ["localhost:9002/api/Auth/login", "[::1]:9002/api/Auth"]
+      }
+    },
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true,
+    }),
+    {
+      provide: JWT_OPTIONS,
+      useValue: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:9002"],
+        disallowedRoutes: ["localhost:9002/api/Auth/login", "[::1]:9002/api/Auth"]
+      }
+    },
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true,
+    }),
+    {
+      provide: JWT_OPTIONS,
+      useValue: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:9002"],
+        disallowedRoutes: ["localhost:9002/api/Auth/login", "[::1]:9002/api/Auth"]
+      }
+    },
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true,
+    }),
+    {
+      provide: JWT_OPTIONS,
+      useValue: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:9002"],
+        disallowedRoutes: ["localhost:9002/api/Auth/login", "[::1]:9002/api/Auth"]
+      }
+    },
     provideStoreDevtools({
       maxAge: 25,
       logOnly: environment.production,

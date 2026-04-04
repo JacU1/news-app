@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/auth/auth-service';
-import { NotificationBoxService } from 'src/app/shared/services/notification-box/notification-box.service';
-import { NotificationTypes } from 'src/app/core/models/notification-box.interface';
-import { BasePage } from 'src/app/shared/classes/BasePage';
-import { CsrfService } from 'src/app/shared/services/csrf/csrf.service';
-import { MovingBannersComponent } from 'src/app/shared/components/moving-banners/moving-banners.component';
+import { MovingBannersComponent } from '../../shared/components/moving-banners/moving-banners.component';
+import { BasePage } from '../../shared/classes/BasePage';
+import { NotificationBoxService } from '../../shared/services/notification-box/notification-box.service';
+import { AuthService } from '../../shared/services/auth/auth-service';
+import { CsrfService } from '../../shared/services/csrf/csrf.service';
+import { NotificationTypes } from '../../core/models/notification-box.interface';
 
 @Component({
   selector: 'app-login',

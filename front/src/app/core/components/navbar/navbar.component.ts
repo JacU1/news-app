@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AuthService } from 'src/app/shared/services/auth/auth-service';
-import { AppStateInterface } from '../../models/appState.interface';
-import { articlesSelector } from '../../store';
-import { Observable, map, of } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../shared/services/auth/auth-service';
 
 export interface SearchBarDropdown {
   id: number;
@@ -21,32 +18,14 @@ export interface SearchBarDropdown {
   standalone: true,
   imports: [RouterModule, NgSelectModule, CommonModule, FormsModule],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   public selectedArticle!: string;
   public dropdownItems$!: Observable<SearchBarDropdown[]>;
 
   constructor(
     private readonly _authService: AuthService,
-    private readonly _store: Store<AppStateInterface>,
     private readonly _router: Router,
   ) {}
-
-  ngOnInit(): void {
-    this.dropdownItems$ = this._store.select(articlesSelector).pipe(
-      map((articles) => {
-        const dropdownItems: SearchBarDropdown[] = [];
-        articles.map((article) => {
-          const dropdownItem = {
-            id: articles.indexOf(article) + 1,
-            name: article.title,
-          };
-          dropdownItems.push(dropdownItem);
-        });
-
-        return dropdownItems;
-      }),
-    );
-  }
 
   logoutUser(): void {
     this._authService.logoutUser();
