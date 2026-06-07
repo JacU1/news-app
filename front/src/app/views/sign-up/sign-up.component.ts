@@ -8,7 +8,6 @@ import { MovingBannersComponent } from '../../shared/components/moving-banners/m
 import { BasePage } from '../../shared/classes/BasePage';
 import { AuthService } from '../../shared/services/auth/auth-service';
 import { NotificationBoxService } from '../../shared/services/notification-box/notification-box.service';
-import { CsrfService } from '../../shared/services/csrf/csrf.service';
 import { CustomFormValidators } from '../../shared/classes/custom-form-validators';
 import { NotificationTypes } from '../../core/models/notification-box.interface';
 
@@ -34,10 +33,9 @@ export class SignUpComponent extends BasePage {
   constructor(private readonly _fb: FormBuilder,
               private readonly _authService: AuthService,
               private readonly _notificationBox: NotificationBoxService,
-              private readonly _router: Router,
-              override readonly _csrf: CsrfService) 
+              private readonly _router: Router)
     {
-    super(_csrf);
+    super();
 
     this.formGroup = this._fb.group({
       firstName: new FormControl<string | null>('', [Validators.required]),

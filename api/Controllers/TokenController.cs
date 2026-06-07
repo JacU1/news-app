@@ -5,7 +5,6 @@ using News_App_API.Models;
 
 namespace News_App_API.Controllers
 {
-    [AutoValidateAntiforgeryToken]
     [Route("api/[controller]")]
     [ApiController]
     public class TokenController : Controller
@@ -20,7 +19,6 @@ namespace News_App_API.Controllers
         }
 
         [HttpPost]
-        [IgnoreAntiforgeryToken]
         [Route("refresh")]
         public IActionResult Refresh(TokenApiDto tokenApiModel)
         {
@@ -53,7 +51,6 @@ namespace News_App_API.Controllers
             });
         }
         [HttpPost]
-        [IgnoreAntiforgeryToken]
         [Route("revoke")]
         public IActionResult Revoke()
         {

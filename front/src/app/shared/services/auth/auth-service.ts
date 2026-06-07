@@ -22,9 +22,7 @@ export class AuthService {
       password: loginForm.get("password")?.value
     };
 
-    const headers = this.csrfTokenRequestHandler();
-
-    return this._http.post<IUserAuthResponse>(`${BASE_API}/api/Auth/login`, loginBody, {withCredentials: true, headers})
+    return this._http.post<IUserAuthResponse>(`${BASE_API}/api/Auth/login`, loginBody, {withCredentials: true})
       .pipe(tap((auth => {
         this.setAccessToken(auth.token);
         this.setRefreshToken(auth.refreshToken);
@@ -87,26 +85,12 @@ export class AuthService {
       password: formValue.passwordFormGroup.password
     }
 
-    const headers = this.csrfTokenRequestHandler();
-
-    return this._http.post<any>(`${BASE_API}/api/User/register`,body, {withCredentials: true,  headers}).pipe(
+    return this._http.post<any>(`${BASE_API}/api/User/register`,body, {withCredentials: true}).pipe(
       catchError(err => {
         this._notificationService.showNotificationBox(NotificationTypes.DANGER, err.message);
         return EMPTY;
       })
     );
-  }
-
-  public csrfTokenRequestHandler(): HttpHeaders {
-    const headername = 'X-XSRF-TOKEN';
-    const requestToken = this.getCookie("XSRF-COOKIE"); 
-
-    const headers = new HttpHeaders().append(headername, requestToken)
-                                        .append('Cache-Control', 'no-cache')
-                                        .append('Pragma', 'no-cache')
-                                        .append('content-type', 'application/json')
-
-   return headers;
   }
 
   setAccessToken(token: string): void {

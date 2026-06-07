@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using News_App_API.Context;
 using News_App_API.Interfaces;
@@ -12,7 +11,6 @@ using News_App_API.Services;
 
 namespace News_App_API.Controllers
 {
-    [AutoValidateAntiforgeryToken]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -50,6 +48,7 @@ namespace News_App_API.Controllers
             var accessToken = _tokenService.GenerateAccessToken(claims);
             var refreshToken = _tokenService.GenerateRefreshToken();
             user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); // Refresh token ważny 7 dni
 
             TimeZoneInfo polishTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
             DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, polishTimeZone);

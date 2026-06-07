@@ -10,13 +10,13 @@ namespace News_App_API.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        [EmailAddress]
         [Required(ErrorMessage = "Email is required.")]
         public string? Email { get; set; }
         [PasswordPropertyText]
         [Required(ErrorMessage = "Password is required.")]
         public string? Password { get; set; }
         public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
 

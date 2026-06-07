@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using System.Security.Cryptography.X509Certificates;
 using System.Net;
-using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,21 +32,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-    builder.Services.AddAntiforgery(options => {
-        options.HeaderName = "X-XSRF-TOKEN";
-        options.Cookie.Name = "MyAntiforgery";
-        options.Cookie.HttpOnly = false;
-        options.Cookie.IsEssential = true;
-        options.Cookie.SameSite = SameSiteMode.Lax;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-        options.Cookie.Path = "/";
-        options.SuppressXFrameOptionsHeader = true;
-        options.FormFieldName = "";
-    });
-
-    builder.Services.AddControllersWithViews(options =>
-        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())
-    );
+builder.Services.AddControllers();
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");  
 builder.Services.AddAuthentication(opt =>
@@ -78,23 +63,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
-
-app.Use((context, next) =>
-{
-    var requestPath = context.Request.Path.Value;
-    var tokenSet = antiforgery.GetAndStoreTokens(context);
-    context.Response.Cookies.Append("XSRF-COOKIE", tokenSet.RequestToken!, new CookieOptions
-    {
-        HttpOnly = false,
-        IsEssential = true,
-        SameSite = SameSiteMode.Lax,
-        Secure = true,
-        Path = "/"
-    });
-    return next(context);
-});
 
 app.UseCookiePolicy();
 app.UseAuthorization();

@@ -6,7 +6,6 @@ import { MovingBannersComponent } from '../../shared/components/moving-banners/m
 import { BasePage } from '../../shared/classes/BasePage';
 import { NotificationBoxService } from '../../shared/services/notification-box/notification-box.service';
 import { AuthService } from '../../shared/services/auth/auth-service';
-import { CsrfService } from '../../shared/services/csrf/csrf.service';
 import { NotificationTypes } from '../../core/models/notification-box.interface';
 
 @Component({
@@ -29,10 +28,9 @@ export class LoginComponent extends BasePage {
   constructor(private readonly fb: FormBuilder,
     private readonly _notificationService: NotificationBoxService,
     private readonly _router: Router, 
-    private readonly _authService: AuthService,
-    override readonly _csrf: CsrfService)
+    private readonly _authService: AuthService)
     {
-      super(_csrf);
+      super();
     }
 
   public onLoginClick(): void {
