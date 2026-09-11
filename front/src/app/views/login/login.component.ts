@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  signal,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs';
 import { MovingBannersComponent } from '../../shared/components/moving-banners/moving-banners.component';
-import { BasePage } from '../../shared/classes/BasePage';
 import { NotificationBoxService } from '../../shared/services/notification-box/notification-box.service';
 import { AuthService } from '../../shared/services/auth/auth-service';
 import { NotificationTypes } from '../../core/models/notification-box.interface';
@@ -15,33 +25,49 @@ import { NotificationTypes } from '../../core/models/notification-box.interface'
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [ReactiveFormsModule, MovingBannersComponent]
+  imports: [ReactiveFormsModule, MovingBannersComponent],
 })
-export class LoginComponent extends BasePage {
+export class LoginComponent {
+  private readonly fb = inject(FormBuilder);
+  private readonly notificationService = inject(NotificationBoxService);
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
 
-  public loginFormGroup = this.fb.group({
-    loginName: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.min(6), Validators.max(25)]),
-    rememberMeCheckBox: new FormControl(false)
+  readonly isSubmitting = signal(false);
+
+  readonly loginFormGroup = this.fb.group({
+    loginName: new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required],
+    }),
+    rememberMeCheckBox: new FormControl(false),
   });
 
-  constructor(private readonly fb: FormBuilder,
-    private readonly _notificationService: NotificationBoxService,
-    private readonly _router: Router, 
-    private readonly _authService: AuthService)
-    {
-      super();
-    }
-
   public onLoginClick(): void {
-    this._authService.loginUser(this.loginFormGroup).pipe(takeUntil(this.destroyed$))
-    .subscribe(() => {
-      this._notificationService.showNotificationBox(NotificationTypes.SUCCES, "Login successful !");
-      this._router.navigate(['app', 'home']);
-    });
+    this.isSubmitting.set(true);
+
+    this.authService
+      .loginUser(this.loginFormGroup)
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: () => {
+          this.isSubmitting.set(false);
+          this.notificationService.showNotificationBox(
+            NotificationTypes.SUCCES,
+            'Login successful !',
+          );
+          this.router.navigate(['app', 'home']);
+        },
+        error: () => {
+          this.isSubmitting.set(false);
+        },
+      });
   }
 
   public onRegisterNewUserClick(): void {
-    this._router.navigate(["signup"]);
+    this.router.navigate(['signup']);
   }
 }
