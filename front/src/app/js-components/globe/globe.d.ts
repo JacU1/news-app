@@ -1,0 +1,1 @@
+export function startGlobe(globeContainer: HTMLElement): () => void;

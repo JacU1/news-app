@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {ISliderNews} from 'src/app/core/models/page-carousel.model';
+import { ISliderNews } from '../../../../../core/models/page-carousel.model';
 
 @Component({
     selector: 'app-page-carousel',

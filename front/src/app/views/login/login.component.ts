@@ -1,6 +1,9 @@
 import {
   ChangeDetectionStrategy,
+  AfterViewInit,
   Component,
+  ElementRef,
+  OnDestroy,
   ViewEncapsulation,
   inject,
   signal,
@@ -26,11 +29,13 @@ import { NotificationTypes } from '../../core/models/notification-box.interface'
   standalone: true,
   imports: [ReactiveFormsModule],
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly notificationService = inject(NotificationBoxService);
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
+  #host = inject(ElementRef<HTMLElement>);
+  #disposeGlobe?: () => void;
 
   readonly isSubmitting = signal(false);
 
@@ -44,6 +49,19 @@ export class LoginComponent {
     }),
     rememberMeCheckBox: new FormControl(false),
   });
+
+  ngAfterViewInit(): void {
+    const globeContainer = this.#host.nativeElement.querySelector('[data-globe]') as HTMLElement | null;
+    if (!globeContainer || !globeContainer.clientWidth || !globeContainer.clientHeight) return;
+
+    void import('../../js-components/globe/globe.js').then(({ startGlobe }) => {
+      if (globeContainer.isConnected) this.#disposeGlobe = startGlobe(globeContainer);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.#disposeGlobe?.();
+  }
 
   public onLoginClick(): void {
     this.isSubmitting.set(true);
