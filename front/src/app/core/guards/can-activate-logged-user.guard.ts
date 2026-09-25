@@ -1,30 +1,27 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Route, Router, UrlSegment } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, catchError, map, of, switchMap, throwError } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/auth/auth-service';
-import { NotificationBoxService } from 'src/app/shared/services/notification-box/notification-box.service';
-import { NotificationTypes } from '../models/notification-box.interface';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../shared/services/auth/auth-service';
 
 @Injectable()
 export class CanLoadLoggedUserGuard  {
-  constructor(private readonly _jwtHelper: JwtHelperService,
-              private readonly _authService: AuthService,
-              private readonly _router: Router){ }
+  #authService = inject(AuthService);
+  #jwtHelper = inject(JwtHelperService);
+  #router = inject(Router);
 
   canLoad(route: Route, segments: UrlSegment[]):Observable<boolean> | Promise<boolean> | boolean {
-    const token = this._authService.getAccessToken();
+    const token = this.#authService.getAccessToken();
 
-    if(token && !this._jwtHelper.isTokenExpired(token)) {
+    if(token && !this.#jwtHelper.isTokenExpired(token)) {
       return true;
     }
 
-    if(token && this._jwtHelper.isTokenExpired(token)) {
-      const refreshToken = this._authService.getCookie("refresh_Token");
-      return this._authService.refreshTokenAndCheckAccess(token, refreshToken!);
+    if(token && this.#jwtHelper.isTokenExpired(token)) {
+      return this.#authService.refreshTokenAndCheckAccess(token, this.#authService.getCookie("refresh_Token")!);
     }
 
-    this._router.navigate(["login"]);
+    this.#router.navigate(["login"]);
     return false;
   }
 

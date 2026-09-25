@@ -16,8 +16,6 @@ export class MainNewsComponent implements OnChanges {
 
   public newsItem?: IArticle;
 
-  constructor() {}
-
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.mainPanelNewsArray);
     if(this.mainPanelNewsArray) {

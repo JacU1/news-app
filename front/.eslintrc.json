@@ -34,6 +34,21 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "PropertyDefinition[accessibility='private']",
+            "message": "Use #private syntax instead of the private modifier."
+          },
+          {
+            "selector": "MethodDefinition[accessibility='private']",
+            "message": "Use #private syntax instead of the private modifier."
+          },
+          {
+            "selector": "TSParameterProperty[accessibility='private']",
+            "message": "Use #private syntax instead of the private modifier."
+          }
         ]
       }
     },

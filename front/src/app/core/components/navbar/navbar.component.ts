@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -22,10 +22,8 @@ export class NavbarComponent {
   public selectedArticle!: string;
   public dropdownItems$!: Observable<SearchBarDropdown[]>;
 
-  constructor(
-    private readonly _authService: AuthService,
-    private readonly _router: Router,
-  ) {}
+  private readonly _authService = inject(AuthService);
+  private readonly _router = inject(Router);
 
   logoutUser(): void {
     this._authService.logoutUser();

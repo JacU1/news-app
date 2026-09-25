@@ -9,8 +9,6 @@ export class NotificationBoxService {
 
   public notificationBox$ = new Subject<INotificationBox>();
 
-  constructor() { }
-
   public showNotificationBox(type: NotificationTypes, message: string): void {
     this.notificationBox$.next({type, message, show: true});
 

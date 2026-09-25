@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { IArticle } from '../../core/models/news-api-model';
 export class ArticleComponent implements OnInit {
   public selectedArticle$!: Observable<IArticle>;
 
-  constructor(private readonly _activatedRoute: ActivatedRoute) {}
+  private readonly _activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {}
 }

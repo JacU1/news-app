@@ -13,7 +13,6 @@ import {
 } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { MovingBannersComponent } from '../../shared/components/moving-banners/moving-banners.component';
 import { NotificationBoxService } from '../../shared/services/notification-box/notification-box.service';
 import { AuthService } from '../../shared/services/auth/auth-service';
 import { NotificationTypes } from '../../core/models/notification-box.interface';
@@ -25,7 +24,7 @@ import { NotificationTypes } from '../../core/models/notification-box.interface'
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [ReactiveFormsModule, MovingBannersComponent],
+  imports: [ReactiveFormsModule],
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);

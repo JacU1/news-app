@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LoadingSpinnerService } from '../../services/loading-spinner/loading-spinner.service';
 import { Observable, isObservable } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoadingSpinnerComponent {
 
-  constructor(private readonly loadingSpinnerService: LoadingSpinnerService) {}
+  private readonly loadingSpinnerService = inject(LoadingSpinnerService);
 
   public isLoading$: Observable<boolean> = toObservable(this.loadingSpinnerService.isLoading$);
 

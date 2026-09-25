@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { EMPTY, Observable, catchError, lastValueFrom, map, of, tap } from 'rxjs';
 import { NotificationBoxService } from '../notification-box/notification-box.service';
@@ -11,10 +11,10 @@ import { NotificationTypes } from '../../../core/models/notification-box.interfa
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly _http: HttpClient,
-              private readonly _notificationService: NotificationBoxService,
-              private readonly _router: Router,
-              private readonly _cookieService: CookieService) {}
+  private readonly _http = inject(HttpClient);
+  private readonly _notificationService = inject(NotificationBoxService);
+  private readonly _router = inject(Router);
+  private readonly _cookieService = inject(CookieService);
 
   public loginUser(loginForm: FormGroup): Observable<IUserAuthResponse> {
     const loginBody = {

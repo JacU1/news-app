@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationBoxService } from '../../services/notification-box/notification-box.service';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { NotificationTypes } from '../../../core/models/notification-box.interfa
     imports: [CommonModule]
 })
 export class NotificationBoxComponent implements OnInit, OnDestroy {
+  private readonly _notificationBoxService = inject(NotificationBoxService);
 
   public notificationType?: NotificationTypes | null;
   public notificationMessage?: string | null;
@@ -19,14 +20,12 @@ export class NotificationBoxComponent implements OnInit, OnDestroy {
 
   private subs = new Subscription();
 
-  constructor(private readonly _notificationBoxService: NotificationBoxService) {
+  ngOnInit(): void {
     this.subs.add(this.notificationBox$.subscribe(res => {
       this.notificationType = res.type;
       this.notificationMessage = res.message;
     }));
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();

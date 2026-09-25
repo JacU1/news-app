@@ -6,8 +6,6 @@ export class LoadingSpinnerService {
 
   public isLoading$ = signal<boolean>(false);
 
-  constructor() {}
-
   public showSpinner(): void {
     this.isLoading$.set(true);
   }

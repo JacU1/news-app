@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, Signal, SimpleChanges, signal } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, Signal, SimpleChanges, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { IArticle } from '../../../../../core/models/news-api-model';
 
@@ -20,7 +20,7 @@ export class ContentListComponent {
   
   public currentPage: number = 1;
 
-  constructor(private readonly _router: Router) {}
+  private readonly _router = inject(Router);
 
   get currentPageItems(): IArticle[] {
     const startIndex = (this.currentPage - 1) * 8;

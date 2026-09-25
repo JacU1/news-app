@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MovingBannersComponent } from '../../shared/components/moving-banners/moving-banners.component';
 import { AuthService } from '../../shared/services/auth/auth-service';
 import { NotificationBoxService } from '../../shared/services/notification-box/notification-box.service';
 import { CustomFormValidators } from '../../shared/classes/custom-form-validators';
@@ -24,7 +23,6 @@ import { NotificationTypes } from '../../core/models/notification-box.interface'
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
-    MovingBannersComponent,
   ],
 })
 export class SignUpComponent {

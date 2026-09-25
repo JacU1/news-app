@@ -11,6 +11,4 @@ import {ISliderNews} from 'src/app/core/models/page-carousel.model';
 export class PageCarouselComponent {
   @Input() sliderNews: ISliderNews[]  = [];
 
-  constructor() { }
-
 }
